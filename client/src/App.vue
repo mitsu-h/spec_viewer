@@ -1,6 +1,6 @@
 <template>
   <img alt="Vue logo" src="./assets/logo.png" />
-  <HelloWorld msg="Welcome to Your Vue.js + TypeScript App" />
+  <HelloWorld :msg="msg" />
 </template>
 
 <script lang="ts">
@@ -12,6 +12,7 @@ export default defineComponent({
   components: {
     HelloWorld,
   },
+ 
 });
 </script>
 
