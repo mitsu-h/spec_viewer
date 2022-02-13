@@ -200,4 +200,4 @@ test/
 # End of https://www.toptal.com/developers/gitignore/api/visualstudiocode,vue,django
 
 server/spec_api/tests/audio/*
-# spec_viewer.code-workspace
+spec_viewer.code-workspace
