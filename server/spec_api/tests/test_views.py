@@ -3,6 +3,7 @@ from django.urls import reverse
 from rest_framework.test import APITestCase
 import os
 import librosa
+import numpy as np
 
 
 # Create your tests here.
@@ -36,4 +37,17 @@ class GetWavTest(APITestCase):
         wav, fs = librosa.load(wav_path, sr=None)
         self.assertEqual((response.data["wav"] == wav).all(), True)
         self.assertEqual(response.data["fs"], fs)
+
+
+class GetSpecTest(APITestCase):
+    def test_normal(self):
+        url = reverse("get-spec")
+        wav_path = os.path.join(os.path.dirname(__file__), "audio/compare.wav")
+        wav, fs = librosa.load(wav_path, sr=None)
+        n_fft = 2048
+        response = self.client.post(url, {"wav": wav, "n_fft": n_fft}, format="json")
+
+        stft = np.abs(librosa.stft(wav, n_fft=n_fft))
+        self.assertAlmostEqual((response.data["wav"] == wav).all(), True)
+        self.assertEqual((response.data["spec"] == stft).all(), True)
 
