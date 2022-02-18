@@ -119,19 +119,12 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from "vue";
-import axios from "axios";
+import { defineComponent } from "vue";
 
 export default defineComponent({
   name: "HelloWorld",
-  setup() {
-    const msg = ref(null);
-    axios
-      .get("http://localhost:8080/spec-api/")
-      .then((response) => (msg.value = response.data.message));
-    return {
-      msg: msg,
-    };
+  props: {
+    msg: String,
   },
 });
 </script>
